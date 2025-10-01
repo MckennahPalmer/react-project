@@ -1,18 +1,17 @@
-<<<<<<< HEAD
-# co75f442f8328d27eff3f390a
+# React Web Page Project
 
 Quick start:
 
 ```
 $ yarn # npm install
 $ yarn build # npm run build
-````
+```
 
 ## Development
 
 Run Webpack in watch-mode to continually compile the JavaScript as you work:
 
-```
+````
 $ yarn watch # npm run watch
 # react-project
 
@@ -38,13 +37,11 @@ npm run watch
 # serve the folder (simple):
 # python3 -m http.server 8000
 # then open http://localhost:8000
-```
+````
 
 Notes
 
 - This repository previously contained large or sensitive files in its history. The working copy here is the current project snapshot — node_modules are ignored and should not be committed.
 - If you plan to publish this repository, make sure you do not include private keys or credentials.
 
-Contact
-
-McKennah Palmer — good luck with the interview prep!
+Contact: McKennah Palmer - mkpalm2006@gmail.com
