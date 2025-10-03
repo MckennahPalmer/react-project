@@ -10,6 +10,18 @@
     <body>
         <div id="root">If you see this text, JavaScript hasn't replaced the content.</div>
         <noscript>Please enable JavaScript to run this app.</noscript>
+        <!-- visual debug: will run immediately when the page loads -->
+        <script>
+            try {
+                console.log('inline-script ran');
+                // bright visual border so it's obvious this HTML executed
+                document.documentElement.style.border = '8px solid magenta';
+                var root = document.getElementById('root');
+                if (root) root.style.padding = '12px';
+            } catch (e) {
+                console.error('visual debug failed', e);
+            }
+        </script>
         <script src="dist/index.pack.js"></script>
     </body>
 </html>

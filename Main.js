@@ -1,4 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+}
 
 export default function Main() {
   return (
@@ -11,6 +22,7 @@ export default function Main() {
         <li>Is maintained by Facebook</li>
         <li>Powers thousands of enterprise apps, including mobile apps</li>
       </ul>
+      <Counter />
     </div>
   );
 }

@@ -472,6 +472,9 @@ function Header() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 exports.default = Main;
 
 var _react = __webpack_require__(1);
@@ -479,6 +482,32 @@ var _react = __webpack_require__(1);
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Counter() {
+  var _useState = (0, _react.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      count = _useState2[0],
+      setCount = _useState2[1];
+
+  return _react2.default.createElement(
+    "div",
+    null,
+    _react2.default.createElement(
+      "p",
+      null,
+      "You clicked ",
+      count,
+      " times"
+    ),
+    _react2.default.createElement(
+      "button",
+      { onClick: function onClick() {
+          return setCount(count + 1);
+        } },
+      "Click me"
+    )
+  );
+}
 
 function Main() {
   return _react2.default.createElement(
@@ -517,7 +546,8 @@ function Main() {
         null,
         "Powers thousands of enterprise apps, including mobile apps"
       )
-    )
+    ),
+    _react2.default.createElement(Counter, null)
   );
 }
 
@@ -609,7 +639,60 @@ function App() {
   );
 }
 
-_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById("root"));
+// helper to show mounting status or errors on the page (for users without DevTools)
+function ensureStatusContainer() {
+  var id = "react-status-container";
+  var el = document.getElementById(id);
+  if (!el) {
+    el = document.createElement("div");
+    el.id = id;
+    el.style.position = "fixed";
+    el.style.right = "12px";
+    el.style.top = "12px";
+    el.style.zIndex = 9999;
+    el.style.padding = "8px 12px";
+    el.style.borderRadius = "6px";
+    el.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
+    el.style.fontFamily = "system-ui, -apple-system, sans-serif";
+    el.style.fontSize = "13px";
+    document.body.appendChild(el);
+  }
+  return el;
+}
+
+window.addEventListener("error", function (ev) {
+  try {
+    var c = ensureStatusContainer();
+    c.style.background = "#ffdddd";
+    c.style.color = "#600";
+    c.textContent = "Runtime error: " + (ev && ev.message ? ev.message : ev.toString());
+  } catch (e) {
+    /* ignore */
+  }
+});
+
+try {
+  var rootEl = document.getElementById("root");
+  _reactDom2.default.render(_react2.default.createElement(App, null), rootEl);
+  try {
+    var c = ensureStatusContainer();
+    c.style.background = "#ddffdd";
+    c.style.color = "#060";
+    c.textContent = "React mounted ✔️";
+  } catch (e) {
+    /* ignore */
+  }
+} catch (e) {
+  try {
+    if (rootEl) rootEl.innerHTML = '<pre style="white-space:pre-wrap;color:#900">Render failed: ' + (e && e.stack ? e.stack : e) + "</pre>";
+    var c = ensureStatusContainer();
+    c.style.background = "#ffdddd";
+    c.style.color = "#600";
+    c.textContent = "Render failed: " + (e && e.message ? e.message : e);
+  } catch (err) {
+    /* ignore */
+  }
+}
 
 /***/ }),
 /* 9 */
